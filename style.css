@@ -1681,8 +1681,8 @@ html, body {
     }
 
     .hero-viewport-stage {
-        height: 86svh;
-        min-height: 78svh;
+        height: auto;
+        min-height: 0;
     }
 
     .hero-sharp-photo-frame {
@@ -1691,7 +1691,7 @@ html, body {
     }
 
     .hero-sharp-photo {
-        max-height: 76svh;
+        max-height: none;
     }
 
     .hero-photo-typography {
