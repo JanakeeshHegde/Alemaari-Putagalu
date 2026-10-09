@@ -1,0 +1,1884 @@
+/* ==========================================================================
+   ಅಲೆಮಾರಿ ಪುಟಗಳು · DIGITAL TRAVEL VISUAL JOURNAL
+   Western Ghats · Monsoon · Forest · Waterfall Cinematic Visual Identity
+   Quiet Luxury · Fine-Art Photography · Documentary Travel Journal
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. WESTERN GHATS CINEMATIC PALETTE & DESIGN SYSTEM
+   -------------------------------------------------------------------------- */
+:root {
+    /* Western Ghats Natural Spectrum */
+    --deep-forest:       #102C26; /* Deep Forest Canopy */
+    --rainforest-green:  #24483D; /* Dense Evergreen Shola */
+    --moss:              #58705A; /* Wet Moss & Fern Understory */
+    --mist:              #E8ECE7; /* Mountain Valley Mist */
+    --water-blue:        #6FA6A6; /* Mountain Torrent & Pool */
+    --river-slate:       #344F50; /* Wet Granite Riverbed */
+    --stone:             #B8B6A8; /* Weathered Ridge Stone */
+    --warm-sand:         #D8CDB8; /* Sunlit Earthen Trail */
+    --soft-white:        #F5F4EF; /* Archival Paper & Sunlight */
+    --charcoal:          #18211F; /* Ghats Twilight & Night */
+
+    /* Semantic Default Surface & Typography Tokens */
+    --bg-primary:        var(--soft-white);
+    --text-primary:      #18211F;
+    --text-muted:        rgba(24, 33, 31, 0.74);
+    --text-subtle:       rgba(24, 33, 31, 0.46);
+
+    /* Light Typography for Dark Biomes */
+    --text-light:        #F5F4EF;
+    --text-light-muted:  rgba(245, 244, 239, 0.82);
+    --text-light-subtle: rgba(245, 244, 239, 0.50);
+
+    /* Hairline & Separator Tokens */
+    --hairline-light:    rgba(24, 33, 31, 0.10);
+    --hairline-dark:     rgba(245, 244, 239, 0.14);
+
+    /* Typography Hierarchy System */
+    --font-hero-title:    'Tiro Kannada', 'Noto Serif Kannada', serif;
+    --font-hero-tagline:  'Anek Kannada', 'Noto Sans Kannada', 'Plus Jakarta Sans', sans-serif;
+    --font-section-title: 'Anek Kannada', 'Noto Sans Kannada', sans-serif;
+    --font-caption-kn:    'Noto Serif Kannada', serif;
+    --font-desc-kn:       'Noto Sans Kannada', 'Plus Jakarta Sans', sans-serif;
+    --font-mono-meta:     'JetBrains Mono', monospace;
+    --font-num:           'Plus Jakarta Sans', 'Inter', sans-serif;
+    --font-display-en:    'Cormorant Garamond', serif;
+    --font-note-hand:     'Kalam', cursive;
+
+    /* Viewport-Aware Spacing System */
+    --space-xs: clamp(0.35rem, 0.7vw, 0.65rem);
+    --space-sm: clamp(0.75rem, 1.3vw, 1.15rem);
+    --space-md: clamp(1.15rem, 2vw, 1.75rem);
+    --space-lg: clamp(1.85rem, 3.4vw, 2.85rem);
+    --space-xl: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+/* --------------------------------------------------------------------------
+   02. RESET & GLOBAL BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-desc-kn);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Very Subtle Tactile Film Grain Overlay */
+.film-grain {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.022;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Reading Progress Scrub Line */
+.scroll-progress-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(16, 44, 38, 0.08);
+    z-index: 1001;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--water-blue);
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+/* --------------------------------------------------------------------------
+   03. FLOATING DISCREET LANGUAGE TOGGLE (NO NAVBAR)
+   -------------------------------------------------------------------------- */
+.floating-lang-toggle {
+    position: fixed;
+    top: clamp(1.25rem, 3vh, 2rem);
+    right: clamp(1.25rem, 3.5vw, 2.5rem);
+    z-index: 1000;
+    font-family: var(--font-mono-meta);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: rgba(245, 244, 239, 0.90);
+    background: rgba(16, 44, 38, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(245, 244, 239, 0.18);
+    padding: 0.38rem 0.88rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    user-select: none;
+}
+
+.floating-lang-toggle:hover {
+    background: rgba(36, 72, 61, 0.75);
+    border-color: var(--water-blue);
+    color: var(--soft-white);
+    transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   04. EDITORIAL TYPOGRAPHY HIERARCHY
+   Hero Title · Section Titles · Captions · Body Descriptions · Small Labels · Numbers
+   -------------------------------------------------------------------------- */
+
+/* HERO TITLE: Large expressive Kannada display font */
+.hero-main-title {
+    font-family: var(--font-hero-title);
+    font-size: clamp(3.4rem, 9vw, 7.2rem);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: 0.02em;
+    color: var(--soft-white);
+    text-shadow: 0 4px 28px rgba(16, 44, 38, 0.85), 0 2px 8px rgba(16, 44, 38, 0.95);
+    margin: 0;
+    will-change: transform, opacity, filter;
+}
+
+.hero-sub-display {
+    font-family: var(--font-display-en);
+    font-size: clamp(1.15rem, 2.3vw, 1.95rem);
+    font-style: italic;
+    letter-spacing: 0.20em;
+    color: var(--mist);
+    text-transform: uppercase;
+    opacity: 0.95;
+    text-shadow: 0 2px 14px rgba(16, 44, 38, 0.85);
+    margin-top: -0.25rem;
+}
+
+.hero-poetic-tagline {
+    font-family: var(--font-caption-kn);
+    font-size: clamp(1.1rem, 2vw, 1.55rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--soft-white);
+    opacity: 0.96;
+    text-shadow: 0 2px 12px rgba(16, 44, 38, 0.80);
+    margin: 0;
+}
+
+/* SECTION TITLES: Strong modern Kannada font */
+.prologue-quote {
+    font-family: var(--font-section-title);
+    font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+    font-weight: 600;
+    line-height: 1.6;
+    color: inherit;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.quote-interlude-text {
+    font-family: var(--font-section-title);
+    font-size: clamp(1.4rem, 2.8vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.55;
+    color: inherit;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.master-cap {
+    font-family: var(--font-section-title);
+    font-size: clamp(1.65rem, 3.2vw, 2.5rem) !important;
+    font-weight: 700;
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--soft-white);
+}
+
+.closing-quote {
+    font-family: var(--font-section-title);
+    font-size: clamp(1.4rem, 3vw, 2.35rem);
+    font-weight: 600;
+    line-height: 1.48;
+    color: var(--soft-white);
+    letter-spacing: -0.01em;
+}
+
+/* CAPTIONS: Elegant lighter Kannada font */
+.cap-editorial {
+    font-family: var(--font-caption-kn);
+    font-size: clamp(1.2rem, 2.2vw, 1.68rem);
+    font-weight: 400;
+    line-height: 1.44;
+    letter-spacing: 0.01em;
+    color: inherit;
+}
+
+.hero-caption {
+    font-family: var(--font-caption-kn);
+    font-size: clamp(1.22rem, 2.1vw, 1.6rem);
+    font-weight: 400;
+    line-height: 1.38;
+    color: var(--soft-white);
+    text-shadow: 0 2px 14px rgba(16, 44, 38, 0.85);
+    margin: 0;
+}
+
+/* BODY DESCRIPTION: Clean highly readable Kannada font */
+.desc-editorial {
+    font-family: var(--font-desc-kn);
+    font-size: clamp(0.92rem, 1.35vw, 1.05rem);
+    font-weight: 300;
+    line-height: 1.74;
+    letter-spacing: 0.01em;
+    color: inherit;
+    white-space: pre-line;
+}
+
+.hero-description {
+    font-family: var(--font-desc-kn);
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(245, 244, 239, 0.92);
+    text-shadow: 0 1px 8px rgba(16, 44, 38, 0.85);
+    margin: 0;
+}
+
+.closing-sub-quote {
+    font-family: var(--font-desc-kn);
+    font-size: clamp(0.92rem, 1.4vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(245, 244, 239, 0.80);
+    letter-spacing: 0.02em;
+}
+
+/* SMALL LABELS: Minimal uppercase English typography with letter spacing */
+.micro-tag,
+.hero-eyebrow,
+.prologue-num,
+.prologue-topic,
+.quote-interlude-tag,
+.memory-wall-note,
+.hero-narrative-eyebrow,
+.hero-scroll-text {
+    font-family: var(--font-mono-meta);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.editorial-hand-note {
+    font-family: var(--font-note-hand);
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+    line-height: 1.4;
+    display: inline-block;
+    margin-top: 0.35rem;
+    opacity: 0.92;
+}
+
+/* NUMBERS: Elegant modern sans-serif */
+.hero-meta-coord,
+.closing-meta {
+    font-family: var(--font-num);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.16em;
+}
+
+/* --------------------------------------------------------------------------
+   05. SECTION THEMES & WESTERN GHATS PALETTE IDENTITY
+   Deep Forest · Rainforest Green · Moss · Mist · Water Blue · River Slate · Stone · Warm Sand · Soft White · Charcoal
+   -------------------------------------------------------------------------- */
+.journal-section {
+    width: 100%;
+    position: relative;
+    padding: 0 4vw;
+    overflow: hidden;
+    transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Seamless Continuous Landscape Transitions between Biomes */
+.journal-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: clamp(3.5rem, 8vh, 6.5rem);
+    background: linear-gradient(180deg, var(--section-blend, rgba(245, 244, 239, 0.65)) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.journal-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: clamp(3.5rem, 8vh, 6.5rem);
+    background: linear-gradient(0deg, var(--section-blend, rgba(245, 244, 239, 0.65)) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 1. Deep Forest (#102C26) */
+.theme-deep-forest {
+    background-color: var(--deep-forest) !important;
+    color: var(--soft-white);
+    --section-blend: rgba(16, 44, 38, 0.90);
+}
+.theme-deep-forest .cap-editorial,
+.theme-deep-forest .master-cap,
+.theme-deep-forest .closing-quote,
+.theme-deep-forest .prologue-quote {
+    color: var(--soft-white);
+}
+.theme-deep-forest .desc-editorial,
+.theme-deep-forest .master-desc,
+.theme-deep-forest .closing-sub-quote {
+    color: rgba(245, 244, 239, 0.82);
+}
+.theme-deep-forest .micro-tag,
+.theme-deep-forest .prologue-num {
+    color: var(--water-blue);
+}
+.theme-deep-forest .editorial-hand-note {
+    color: var(--warm-sand);
+}
+.theme-deep-forest .topographic-contour-lines svg {
+    stroke: var(--mist);
+    opacity: 0.12;
+}
+
+/* 2. Rainforest Green (#24483D) */
+.theme-rainforest,
+.theme-forest {
+    background-color: var(--rainforest-green) !important;
+    color: var(--soft-white);
+    --section-blend: rgba(36, 72, 61, 0.90);
+}
+.theme-rainforest .cap-editorial,
+.theme-rainforest .master-cap,
+.theme-forest .cap-editorial {
+    color: var(--soft-white);
+}
+.theme-rainforest .desc-editorial,
+.theme-rainforest .master-desc,
+.theme-forest .desc-editorial {
+    color: rgba(245, 244, 239, 0.84);
+}
+.theme-rainforest .micro-tag,
+.theme-forest .micro-tag {
+    color: var(--mist);
+}
+.theme-rainforest .editorial-hand-note,
+.theme-forest .editorial-hand-note {
+    color: var(--warm-sand);
+}
+.theme-rainforest .topographic-contour-lines svg,
+.theme-forest .topographic-contour-lines svg {
+    stroke: var(--soft-white);
+    opacity: 0.10;
+}
+
+/* 3. Moss (#384F3D) */
+.theme-moss {
+    background-color: #384F3D !important;
+    color: var(--soft-white);
+    --section-blend: rgba(56, 79, 61, 0.90);
+}
+.theme-moss .cap-editorial {
+    color: var(--soft-white);
+}
+.theme-moss .desc-editorial {
+    color: rgba(245, 244, 239, 0.82);
+}
+.theme-moss .micro-tag {
+    color: var(--warm-sand);
+}
+.theme-moss .editorial-hand-note {
+    color: var(--mist);
+}
+
+/* 4. Mist (#E8ECE7) */
+.theme-mist {
+    background-color: var(--mist) !important;
+    color: var(--charcoal);
+    --section-blend: rgba(232, 236, 231, 0.90);
+}
+.theme-mist .cap-editorial {
+    color: var(--deep-forest);
+}
+.theme-mist .desc-editorial {
+    color: rgba(24, 33, 31, 0.78);
+}
+.theme-mist .micro-tag {
+    color: var(--river-slate);
+}
+.theme-mist .editorial-hand-note {
+    color: var(--moss);
+}
+
+/* 5. Deep River Slate (#344F50) */
+.theme-river-slate {
+    background-color: var(--river-slate) !important;
+    color: var(--soft-white);
+    --section-blend: rgba(52, 79, 80, 0.90);
+}
+.theme-river-slate .cap-editorial,
+.theme-river-slate .master-cap {
+    color: var(--soft-white);
+}
+.theme-river-slate .desc-editorial,
+.theme-river-slate .master-desc {
+    color: rgba(245, 244, 239, 0.84);
+}
+.theme-river-slate .micro-tag {
+    color: var(--water-blue);
+}
+.theme-river-slate .editorial-hand-note {
+    color: var(--mist);
+}
+
+/* 6. Water Blue (#DDE8E8) */
+.theme-water {
+    background-color: #DDE8E8 !important;
+    color: var(--charcoal);
+    --section-blend: rgba(221, 232, 232, 0.90);
+}
+.theme-water .cap-editorial {
+    color: var(--deep-forest);
+}
+.theme-water .desc-editorial {
+    color: rgba(24, 33, 31, 0.78);
+}
+.theme-water .micro-tag {
+    color: var(--river-slate);
+}
+.theme-water .editorial-hand-note {
+    color: var(--moss);
+}
+
+/* 7. Stone (#E4E2DC / #B8B6A8) */
+.theme-stone {
+    background-color: #E4E2DC !important;
+    color: var(--charcoal);
+    --section-blend: rgba(228, 226, 220, 0.90);
+}
+.theme-stone .cap-editorial {
+    color: var(--charcoal);
+}
+.theme-stone .desc-editorial {
+    color: rgba(24, 33, 31, 0.78);
+}
+.theme-stone .micro-tag {
+    color: var(--moss);
+}
+.theme-stone .editorial-hand-note {
+    color: var(--river-slate);
+}
+
+/* 8. Warm Sand (#D8CDB8) */
+.theme-sand,
+.theme-trail {
+    background-color: var(--warm-sand) !important;
+    color: var(--charcoal);
+    --section-blend: rgba(216, 205, 184, 0.90);
+}
+.theme-sand .cap-editorial,
+.theme-trail .cap-editorial {
+    color: var(--deep-forest);
+}
+.theme-sand .desc-editorial,
+.theme-trail .desc-editorial {
+    color: rgba(24, 33, 31, 0.78);
+}
+.theme-sand .micro-tag,
+.theme-trail .micro-tag {
+    color: var(--rainforest-green);
+}
+.theme-sand .editorial-hand-note,
+.theme-trail .editorial-hand-note {
+    color: var(--river-slate);
+}
+
+/* 9. Soft White (#F5F4EF) */
+.theme-soft-white,
+.theme-paper {
+    background-color: var(--soft-white) !important;
+    color: var(--charcoal);
+    --section-blend: rgba(245, 244, 239, 0.90);
+}
+.theme-soft-white .cap-editorial,
+.theme-paper .cap-editorial {
+    color: var(--deep-forest);
+}
+.theme-soft-white .desc-editorial,
+.theme-paper .desc-editorial {
+    color: rgba(24, 33, 31, 0.76);
+}
+.theme-soft-white .micro-tag,
+.theme-paper .micro-tag {
+    color: var(--moss);
+}
+.theme-soft-white .editorial-hand-note,
+.theme-paper .editorial-hand-note {
+    color: var(--river-slate);
+}
+
+/* 10. Charcoal Twilight (#18211F) */
+.theme-charcoal,
+.theme-deep-green {
+    background-color: var(--charcoal) !important;
+    color: var(--soft-white);
+    --section-blend: rgba(24, 33, 31, 0.94);
+}
+.theme-charcoal .cap-editorial,
+.theme-charcoal .closing-quote,
+.theme-deep-green .cap-editorial {
+    color: var(--soft-white);
+}
+.theme-charcoal .desc-editorial,
+.theme-charcoal .closing-sub-quote,
+.theme-deep-green .desc-editorial {
+    color: rgba(245, 244, 239, 0.80);
+}
+.theme-charcoal .micro-tag,
+.theme-deep-green .micro-tag {
+    color: var(--warm-sand);
+}
+.theme-charcoal .editorial-hand-note,
+.theme-deep-green .editorial-hand-note {
+    color: var(--mist);
+}
+
+/* Biome Environments (Supplemental Tone Overrides) */
+.env-forest    { --biome-tint: var(--rainforest-green); }
+.env-waterfall { --biome-tint: var(--water-blue); }
+.env-monsoon   { --biome-tint: var(--river-slate); }
+.env-mist      { --biome-tint: var(--mist); }
+.env-trail     { --biome-tint: var(--warm-sand); }
+.env-rock      { --biome-tint: var(--stone); }
+.env-dusk      { --biome-tint: var(--charcoal); }
+
+/* --------------------------------------------------------------------------
+   06. ATMOSPHERIC BACKDROPS & SUBTLE ENVIRONMENTAL TEXTURES
+   -------------------------------------------------------------------------- */
+.photo-ambient-backdrop {
+    position: absolute;
+    inset: -14% -10%;
+    background-position: center 40%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(54px) saturate(1.25) brightness(0.96);
+    opacity: var(--ambient-opacity, 0.16);
+    transform: scale(1.12) translate3d(0, 0, 0);
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+    mix-blend-mode: multiply;
+    mask-image: radial-gradient(ellipse 78% 72% at 50% 50%, black 20%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 78% 72% at 50% 50%, black 20%, transparent 78%);
+}
+
+.theme-deep-forest .photo-ambient-backdrop,
+.theme-rainforest .photo-ambient-backdrop,
+.theme-river-slate .photo-ambient-backdrop,
+.theme-charcoal .photo-ambient-backdrop {
+    mix-blend-mode: screen;
+    opacity: 0.20;
+}
+
+.env-texture-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.env-texture-rain {
+    background-image: repeating-linear-gradient(
+        105deg,
+        rgba(111, 166, 166, 0.05) 0px,
+        rgba(111, 166, 166, 0.05) 1px,
+        transparent 1px,
+        transparent 18px
+    );
+    opacity: 0.75;
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 30%, transparent 80%);
+}
+
+.env-texture-dappled {
+    background: radial-gradient(circle at 18% 28%, rgba(36, 72, 61, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 82% 64%, rgba(88, 112, 90, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 88%, rgba(16, 44, 38, 0.04) 0%, transparent 40%);
+    opacity: 0.85;
+}
+
+.env-texture-mist {
+    background: radial-gradient(ellipse 82% 55% at 50% 40%, rgba(232, 236, 231, 0.45) 0%, transparent 75%),
+                linear-gradient(180deg, transparent 0%, rgba(232, 236, 231, 0.22) 50%, transparent 100%);
+    opacity: 0.75;
+}
+
+.topographic-contour-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0.075;
+}
+
+.topographic-contour-lines svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 0.65px;
+    fill: none;
+}
+
+/* Oversized Curatorial Watermarks */
+.section-bg-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display-en);
+    font-size: clamp(6rem, 19vw, 19rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: currentColor;
+    opacity: 0.045;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1;
+    user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   07. HERO SECTION (100VW EDGE-TO-EDGE FULL WIDTH + UNTOUCHED SHARP PHOTO)
+   - Edge-to-edge 100vw width, zero horizontal side gaps
+   - Complete uncropped photograph with width: 100%; height: auto; display: block;
+   - Title & Tagline placed in upper quiet dawn sky overlay
+   - Fully responsive across desktop, tablet, and mobile
+   -------------------------------------------------------------------------- */
+.section-hero-wrapper {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding: 0 !important;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    background-color: var(--deep-forest, #102C26);
+}
+
+.section-hero-wrapper::before,
+.section-hero-wrapper::after {
+    display: none !important; /* Never overlay top or bottom gradients on hero */
+}
+
+/* 1. FULLSCREEN / EDGE-TO-EDGE HERO VIEWPORT STAGE */
+.hero-viewport-stage {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: block;
+    overflow: hidden;
+    background: var(--deep-forest, #102C26);
+}
+
+@media (max-width: 768px) {
+    .hero-viewport-stage {
+        height: auto;
+        min-height: 0;
+    }
+}
+
+/* LAYER 1: Atmospheric backdrop */
+.hero-atmospheric-bg {
+    display: none;
+}
+
+/* LAYER 2: Actual Sharp Hero Photograph Figure (Edge-to-Edge 100vw, Zero Blank Box) */
+.hero-photo-figure {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    will-change: transform, opacity;
+}
+
+/* Subtle curatorial top vignette for pristine text contrast against sunrise sky */
+.hero-photo-figure::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52%;
+    background: linear-gradient(180deg, rgba(8, 22, 18, 0.62) 0%, rgba(8, 22, 18, 0.20) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+@media (max-width: 768px) {
+    .hero-photo-figure {
+        max-width: 100%;
+        max-height: none;
+    }
+}
+
+.hero-sharp-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: none;
+    object-fit: contain;
+    aspect-ratio: 2800 / 1871;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: brightness(0.98) contrast(1.02);
+    will-change: transform;
+}
+
+@media (max-width: 768px) {
+    .hero-sharp-photo {
+        max-height: none;
+    }
+}
+
+/* Title & Tagline Centered Elegantly on the Sharp Photograph */
+.hero-typography-overlay {
+    position: absolute;
+    top: clamp(2rem, 5.5vw, 4.8rem);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: min(92vw, 1100px);
+    text-align: center;
+    z-index: 4;
+    pointer-events: none;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+}
+
+/* HERO TITLE: Grand expressive Kannada display font */
+.hero-title {
+    font-family: 'Anek Kannada', 'Noto Serif Kannada', 'Tiro Kannada', serif;
+    font-size: clamp(2.4rem, 6.4vw, 5.4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: 0.02em;
+    color: #F5F4EF;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.78), 0 2px 8px rgba(16, 44, 38, 0.95);
+    margin: 0;
+    text-align: center;
+    will-change: transform, opacity;
+}
+
+/* HERO TAGLINE: Clean modern Kannada sans-serif */
+.hero-tagline {
+    font-family: 'Anek Kannada', 'Noto Sans Kannada', sans-serif;
+    font-size: clamp(0.92rem, 1.8vw, 1.4rem);
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0.10em;
+    color: rgba(245, 244, 239, 0.95);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 1px 4px rgba(16, 44, 38, 0.90);
+    margin-top: clamp(0.45rem, 1.1vw, 0.95rem);
+    margin-bottom: 0;
+    text-align: center;
+    will-change: transform, opacity;
+}
+
+/* Viewport Scroll Cue */
+.hero-scroll-cue {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vw, 2rem);
+    right: clamp(1.2rem, 3.8vw, 3.2rem);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.hero-scroll-cue-line {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(180deg, rgba(245, 244, 239, 0.85) 0%, rgba(245, 244, 239, 0.08) 100%);
+}
+
+.hero-scroll-cue-arrow {
+    font-size: 0.70rem;
+    color: rgba(245, 244, 239, 0.85);
+}
+
+/* 2. EDITORIAL CAPTION & DESCRIPTION DIRECTLY BELOW THE IMAGE */
+.hero-narrative-stage {
+    position: relative;
+    width: 100%;
+    max-width: min(1120px, 92vw);
+    margin: 0 auto;
+    padding-top: clamp(16px, 2.4vw, 24px); /* 16-24px below image as requested in #14 */
+    padding-bottom: clamp(20px, 3.2vw, 36px); /* small spacing next section as requested in #14 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    z-index: 5;
+}
+
+.hero-narrative-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-caption {
+    font-family: var(--font-caption-kn, 'Noto Serif Kannada', serif);
+    font-size: clamp(1.22rem, 2.2vw, 1.72rem);
+    font-weight: 500;
+    line-height: 1.44;
+    color: #F5F4EF;
+    text-shadow: 0 1px 8px rgba(10, 26, 22, 0.70);
+    margin: 0;
+}
+
+.hero-description {
+    font-family: var(--font-desc-kn, 'Noto Sans Kannada', sans-serif);
+    font-size: clamp(0.92rem, 1.3vw, 1.06rem);
+    font-weight: 300;
+    line-height: 1.68;
+    color: rgba(245, 244, 239, 0.86);
+    text-shadow: 0 1px 6px rgba(10, 26, 22, 0.60);
+    margin-top: clamp(8px, 1.2vw, 14px); /* 8-14px below caption as requested in #14 */
+    margin-bottom: 0;
+    max-width: min(720px, 92vw);
+}
+
+/* --------------------------------------------------------------------------
+   08. INTERLUDES & ARCHIVAL SECTIONS
+   -------------------------------------------------------------------------- */
+.journal-story-prologue-wrap {
+    position: relative;
+    width: 100%;
+    padding: clamp(2.2rem, 4.5vh, 4rem) 4vw;
+    overflow: hidden;
+    text-align: center;
+}
+
+.prologue-container {
+    position: relative;
+    max-width: min(780px, 88vw);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    z-index: 2;
+}
+
+.prologue-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono-meta);
+    font-size: 0.72rem;
+    letter-spacing: 0.20em;
+    color: var(--river-slate);
+    text-transform: uppercase;
+}
+
+.prologue-num {
+    font-weight: 500;
+}
+
+.prologue-sep {
+    opacity: 0.45;
+}
+
+.prologue-hairline {
+    width: 60px;
+    height: 1px;
+    background: var(--hairline-light);
+}
+
+/* Visual Quote Interlude before Final Frame */
+.journal-visual-quote-interlude {
+    position: relative;
+    width: 100%;
+    padding: clamp(4.5rem, 9vh, 7.5rem) 4vw;
+    overflow: hidden;
+    text-align: center;
+    margin-top: clamp(2rem, 5vh, 4rem);
+}
+
+.quote-interlude-content {
+    position: relative;
+    max-width: min(800px, 90vw);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    z-index: 2;
+}
+
+.quote-interlude-tag {
+    font-family: var(--font-mono-meta);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    color: var(--river-slate);
+    text-transform: uppercase;
+}
+
+.quote-interlude-line {
+    width: 80px;
+    height: 1px;
+    background: var(--water-blue);
+    opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   09. BORDERLESS PHOTOGRAPH SYSTEM & SOFT DEPTH
+   No rectangular borders · Subtle image spacing · Gentle natural shadows
+   -------------------------------------------------------------------------- */
+.journal-figure,
+.offset-figure,
+.quiet-pause-figure,
+.cinematic-master-figure,
+.cinematic-full-figure {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 2;
+}
+
+.uncropped-img,
+.journal-photo,
+.feature-wide-photo,
+.cinematic-full-photo,
+.offset-photo,
+.duo-photo,
+.vertical-story-photo,
+.cw-photo,
+.small-memory-photo,
+.split-photo,
+.memory-photo,
+.quiet-pause-photo,
+.cinematic-master-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none !important; /* NO rectangular borders */
+    border-radius: 0;
+    box-shadow: 0 10px 32px -10px rgba(16, 44, 38, 0.14), 0 3px 12px rgba(16, 44, 38, 0.06);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.8s ease;
+}
+
+.theme-deep-forest .uncropped-img,
+.theme-rainforest .uncropped-img,
+.theme-river-slate .uncropped-img,
+.theme-charcoal .uncropped-img,
+.section-final .journal-photo,
+.section-cinematic-master .cinematic-master-photo {
+    box-shadow: 0 18px 48px -12px rgba(0, 0, 0, 0.6), 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .uncropped-img:hover,
+    .journal-photo:hover {
+        transform: scale(1.012);
+        box-shadow: 0 20px 48px -12px rgba(16, 44, 38, 0.22), 0 6px 20px rgba(16, 44, 38, 0.08);
+    }
+    .theme-deep-forest .uncropped-img:hover,
+    .theme-rainforest .uncropped-img:hover,
+    .theme-river-slate .uncropped-img:hover,
+    .theme-charcoal .uncropped-img:hover,
+    .section-final .journal-photo:hover {
+        box-shadow: 0 24px 56px -12px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+}
+
+/* Hide corner marks / double borders */
+.editorial-mark-tl,
+.editorial-mark-br {
+    display: none !important;
+}
+
+/* Soft Radial Mist Halo behind photos */
+.photo-mist-halo {
+    position: absolute;
+    inset: -24px;
+    background: radial-gradient(ellipse 92% 88% at 50% 50%, var(--photo-halo-tint, rgba(111, 166, 166, 0.18)) 0%, transparent 72%);
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.75;
+}
+
+/* Micro-Tags & Caption Blocks */
+.caption-block,
+.offset-caption-block,
+.final-caption-block,
+.quiet-pause-caption,
+.cinematic-caption-wrap,
+.split-caption,
+.duo-caption {
+    position: relative;
+    z-index: 3;
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    max-width: 680px;
+}
+
+/* --------------------------------------------------------------------------
+   10. SPECIFIC EDITORIAL LAYOUT ARCHETYPES
+   -------------------------------------------------------------------------- */
+
+/* Layout 02 — Cinematic Feature Wide */
+.section-feature-wide {
+    padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.feature-wide-stage {
+    width: 100%;
+    max-width: clamp(920px, 86vw, 1360px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feature-wide-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.feature-wide-stage .caption-block {
+    margin-top: clamp(1.25rem, 2.5vh, 2rem);
+    max-width: 680px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Layout 03 — Editorial Offset */
+.section-editorial-offset {
+    padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.offset-container {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.offset-container.align-right {
+    align-items: flex-end;
+}
+
+.offset-container.align-left {
+    align-items: flex-start;
+}
+
+.offset-figure {
+    width: clamp(320px, 72vw, 980px);
+    display: block;
+}
+
+.offset-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.offset-caption-block {
+    margin-top: 1.25rem;
+    max-width: 540px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.offset-container.align-right .offset-caption-block {
+    text-align: right;
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.offset-container.align-left .offset-caption-block {
+    text-align: left;
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+/* Layout 04 — Asymmetric Duo */
+.section-asymmetric-duo {
+    padding: clamp(2.5rem, 5.5vh, 4.5rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.duo-stage {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 5rem);
+}
+
+.duo-primary-col {
+    flex: 0 0 58%;
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.duo-secondary-col {
+    flex: 0 0 36%;
+    max-width: 38%;
+    margin-top: clamp(2.5rem, 7vh, 5.5rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.duo-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.duo-caption {
+    margin-top: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+/* Layout 05 — Vertical Story */
+.section-vertical-story {
+    padding: clamp(2.5rem, 5.5vh, 4.5rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.vertical-story-stage {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.vertical-story-stage.photo-right {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+}
+
+.vertical-story-stage.photo-right .vertical-photo-col {
+    order: 2;
+}
+
+.vertical-story-stage.photo-right .vertical-text-col {
+    order: 1;
+    text-align: right;
+    align-items: flex-end;
+}
+
+.vertical-photo-col {
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    justify-content: center;
+}
+
+.vertical-story-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.vertical-text-col {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Layout 06 — Photo + Text Counterweight */
+.section-counterweight {
+    padding: clamp(2.5rem, 5.5vh, 4.5rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.counterweight-stage {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6.5rem);
+}
+
+.counterweight-stage.photo-right {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+}
+
+.counterweight-stage.photo-right .cw-photo-col {
+    order: 2;
+}
+
+.counterweight-stage.photo-right .cw-text-col {
+    order: 1;
+    text-align: right;
+    align-items: flex-end;
+}
+
+.cw-photo-col {
+    width: 100%;
+}
+
+.cw-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cw-text-col {
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Layout 07 — Small Memory */
+.section-small-memory {
+    padding: clamp(3rem, 6vh, 5rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.small-memory-stage {
+    width: 100%;
+    max-width: clamp(360px, 48vw, 620px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.small-memory-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.small-memory-caption {
+    margin-top: 1.25rem;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Layout 08 — Split Visual */
+.section-split-visual {
+    padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.split-visual-stage {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: flex-start;
+}
+
+.split-col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.split-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.split-caption {
+    margin-top: 1.15rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout 09 — High-Density Memory Wall Exhibition */
+.section-memory-wall {
+    padding: clamp(2.5rem, 5vh, 4.5rem) clamp(1rem, 3.5vw, 3rem);
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.memory-wall-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--hairline-dark);
+    padding-bottom: 0.85rem;
+    margin-bottom: clamp(2rem, 4vh, 3.5rem);
+}
+
+.memory-wall-note {
+    font-family: var(--font-mono-meta);
+    font-size: clamp(0.62rem, 0.8vw, 0.72rem);
+    letter-spacing: 0.16em;
+    color: var(--water-blue);
+    text-transform: uppercase;
+}
+
+.memory-wall-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    width: 100%;
+}
+
+.memory-wall-col {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vh, 4rem);
+}
+
+.memory-wall-col.col-primary {
+    flex: 0 0 54%;
+}
+
+.memory-wall-col.col-secondary {
+    flex: 0 0 42%;
+    margin-top: clamp(2rem, 5vh, 4rem);
+}
+
+.memory-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.memory-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Layout 10 — Quiet Visual Pause */
+.section-quiet-pause {
+    padding: clamp(3rem, 7vh, 6rem) clamp(1rem, 3.5vw, 2.75rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.quiet-pause-stage {
+    width: 100%;
+    max-width: clamp(380px, 44vw, 580px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiet-pause-figure {
+    width: 100%;
+}
+
+.quiet-pause-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.quiet-pause-caption {
+    margin-top: 1.5rem;
+    max-width: 480px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Layout 11 — Cinematic Master Moment */
+.section-cinematic-master {
+    padding: clamp(3rem, 6vh, 5.5rem) clamp(1rem, 3vw, 2.5rem);
+    width: 100%;
+}
+
+.cinematic-master-stage {
+    width: 100%;
+    max-width: clamp(980px, 94vw, 1440px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cinematic-master-figure {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cinematic-master-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cinematic-master-caption {
+    margin-top: 1.5rem;
+    max-width: 820px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0 1rem;
+}
+
+/* Layout 12 — Cinematic Full Frame */
+.section-cinematic-full {
+    padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 3.5vw, 2.75rem);
+}
+
+.cinematic-full-stage {
+    width: 100%;
+    max-width: min(1360px, 92vw);
+    margin: 0 auto;
+}
+
+.cinematic-full-figure {
+    width: 100%;
+}
+
+.cinematic-full-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cinematic-caption-wrap {
+    margin-top: 1.25rem;
+    max-width: 720px;
+}
+
+/* Layout 13 — Quiet Ending & Book Back-Cover (Frame 42 in Charcoal) */
+.section-final {
+    width: 100%;
+    background-color: var(--charcoal);
+    color: var(--soft-white);
+    padding-top: clamp(4rem, 8vh, 7rem);
+    padding-bottom: clamp(5rem, 10vh, 9rem);
+    transition: background-color 0.8s ease;
+}
+
+.final-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.final-caption-block {
+    text-align: center;
+    margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.final-caption-block .cap-editorial {
+    color: var(--soft-white);
+}
+
+.final-caption-block .desc-editorial {
+    color: rgba(245, 244, 239, 0.82);
+}
+
+/* Back-Cover Footer Stage */
+.closing-book-stage {
+    margin-top: clamp(4.5rem, 9vh, 7.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 780px;
+}
+
+.closing-divider-line {
+    width: clamp(48px, 8vw, 72px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--water-blue), transparent);
+    margin-bottom: clamp(2.5rem, 5vh, 4rem);
+    opacity: 0.6;
+}
+
+.closing-statement-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.footer-logo-wrap {
+    margin-top: clamp(2.5rem, 5vh, 4rem);
+    margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.closing-logo-img {
+    width: 100%;
+    max-width: clamp(180px, 22vw, 260px);
+    height: auto;
+    aspect-ratio: 1536 / 607;
+    object-fit: contain;
+    background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(245, 244, 239, 0.09) 0%, rgba(245, 244, 239, 0.02) 60%, transparent 85%);
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    filter: drop-shadow(0 0 1px rgba(245, 244, 239, 0.35)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.45));
+    opacity: 0.98;
+    transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+}
+
+.closing-logo-img:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 1.5px rgba(245, 244, 239, 0.55)) drop-shadow(0 6px 24px rgba(0, 0, 0, 0.65));
+}
+
+.closing-meta {
+    font-family: var(--font-mono-meta);
+    font-size: clamp(0.68rem, 0.85vw, 0.75rem);
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(245, 244, 239, 0.45);
+    margin: 0;
+    padding-bottom: clamp(2rem, 4vh, 3.5rem);
+}
+
+/* --------------------------------------------------------------------------
+   11. RESPONSIVE EDITORIAL RECOMPOSITION (DESKTOP · TABLET · MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .duo-stage {
+        gap: 2rem;
+    }
+
+    .duo-secondary-col {
+        margin-top: 3rem;
+    }
+
+    .vertical-story-stage,
+    .vertical-story-stage.photo-right {
+        gap: 2.5rem;
+    }
+
+    .counterweight-stage,
+    .counterweight-stage.photo-right {
+        gap: 2.5rem;
+    }
+
+    .split-visual-stage {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-lang-toggle {
+        top: 1rem;
+        right: 1rem;
+        padding: 0.32rem 0.75rem;
+        font-size: 0.68rem;
+    }
+
+    .journal-section {
+        padding: 2.5rem 1.25rem;
+    }
+
+    /* Mobile Hero: Atmospheric Viewport + Sharp Uncropped Photo + Below-Image Narrative */
+    .section-hero-wrapper {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding: 0 !important;
+    }
+
+    .hero-viewport-stage {
+        height: 86svh;
+        min-height: 78svh;
+    }
+
+    .hero-sharp-photo-frame {
+        max-width: 95vw;
+        max-height: 94%;
+    }
+
+    .hero-sharp-photo {
+        max-height: 76svh;
+    }
+
+    .hero-photo-typography {
+        top: 1rem;
+        left: 1rem;
+        max-width: 90%;
+    }
+
+    .hero-main-title {
+        font-size: clamp(1.9rem, 8.5vw, 3.2rem);
+    }
+
+    .hero-tagline {
+        font-size: 0.88rem;
+        letter-spacing: 0.05em;
+    }
+
+    .hero-viewport-scroll-cue {
+        display: none;
+    }
+
+    .hero-narrative-substage {
+        padding-top: 18px;
+        padding-bottom: 28px;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .hero-below-caption {
+        font-size: 1.18rem;
+        line-height: 1.45;
+    }
+
+    .hero-below-description {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-top: 8px;
+    }
+
+    .cinematic-full-stage {
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+
+    .cinematic-caption-wrap {
+        padding: 0 0.5rem;
+    }
+
+    .offset-container.align-right,
+    .offset-container.align-left {
+        align-items: center;
+    }
+
+    .offset-figure {
+        width: 100%;
+    }
+
+    .offset-container.align-right .offset-caption-block,
+    .offset-container.align-left .offset-caption-block {
+        text-align: left;
+        align-self: center;
+        align-items: flex-start;
+        width: 100%;
+        padding: 0;
+    }
+
+    /* Asymmetric Duo stacks vertically on mobile */
+    .duo-stage {
+        flex-direction: column;
+        gap: 2.25rem;
+    }
+
+    .duo-primary-col,
+    .duo-secondary-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-top: 0;
+    }
+
+    /* Vertical Story stacks gracefully */
+    .vertical-story-stage,
+    .vertical-story-stage.photo-right {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .vertical-story-stage.photo-right .vertical-photo-col {
+        order: 1;
+    }
+
+    .vertical-story-stage.photo-right .vertical-text-col {
+        order: 2;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .vertical-text-col {
+        max-width: 100%;
+    }
+
+    /* Counterweight stacks */
+    .counterweight-stage,
+    .counterweight-stage.photo-right {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .counterweight-stage.photo-right .cw-photo-col {
+        order: 1;
+    }
+
+    .counterweight-stage.photo-right .cw-text-col {
+        order: 2;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .cw-text-col {
+        max-width: 100%;
+    }
+
+    /* Split Visual stacks */
+    .split-visual-stage {
+        grid-template-columns: 1fr;
+        gap: 2.25rem;
+    }
+
+    .small-memory-stage {
+        max-width: 88%;
+    }
+
+    /* High-Density Memory Wall Reflows to Sequential Curated Column */
+    .memory-wall-grid {
+        flex-direction: column;
+        gap: 2.25rem;
+    }
+
+    .memory-wall-col.col-primary,
+    .memory-wall-col.col-secondary {
+        flex: 1 1 100%;
+        width: 100%;
+        margin-top: 0;
+        gap: 2.25rem;
+    }
+
+    .quiet-pause-stage {
+        max-width: 92%;
+    }
+
+    .cinematic-master-stage {
+        max-width: 100%;
+    }
+
+    .master-cap {
+        font-size: 1.45rem !important;
+    }
+
+    .closing-book-stage {
+        margin-top: 3.5rem;
+    }
+
+    .closing-divider-line {
+        margin-bottom: 2rem;
+    }
+
+    .footer-logo-wrap {
+        margin-top: 2rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .closing-logo-img {
+        max-width: 175px;
+        padding: 0.4rem 0.75rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .hero-main-title {
+        filter: none !important;
+    }
+    .hero-fullbleed-photo {
+        transform: none !important;
+    }
+}

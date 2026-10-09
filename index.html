@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="ಅಲೆಮಾರಿ ಪುಟಗಳು — ಕಂಡದ್ದು • ಅನುಭವಿಸಿದ್ದು • ಉಳಿಸಿಕೊಂಡದ್ದು. A Continuous Visual Travel Journal Across 27 Photographs.">
+    <title>ಅಲೆಮಾರಿ ಪುಟಗಳು · Travel Visual Journal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Kannada:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Kalam:wght@300;400&family=Noto+Sans+Kannada:wght@300;400;500;600&family=Noto+Serif+Kannada:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Tiro+Kannada:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- GSAP & Lenis Smooth Scroll CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="journal-body">
+
+    <!-- Subtle Film Grain Atmosphere Overlay -->
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <!-- Editorial Progress Line -->
+    <div class="scroll-progress-line" aria-hidden="true">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Discreet Floating Language Switch (Completely separate from any navbar) -->
+    <button class="floating-lang-toggle" id="lang-toggle-btn" aria-label="Switch language">EN</button>
+
+    <!-- Main Editorial Continuous Scroll Canvas -->
+    <main id="journal-canvas" class="journal-canvas" role="main">
+        <!-- Rendered dynamically by script.js with all 27 curated photographs -->
+    </main>
+
+</body>
+</html>
